@@ -147,20 +147,20 @@ disp(highRestore(:, :, 2));
 %% 8. Image reconstruction
 %f = [f f_n]
 
-%首先以standard为例
+%first for standard one 
 f_std = [];
 x_new = [];
-index_element = 1; %用来遍历8*8矩阵
+index_element = 1; %To iterate over the 8*8 matrix
 
-for y = 1:(208/8) %一共这么多行
+for y = 1:(208/8) %the number of lows, used to calculate how many times you need to stack down (Ascending dimension of row vector)
 
-    for x = 1:(288/8) %每一行先往右叠加
+    for x = 1:(288/8) %Right stack (Ascending dimension of column vector)
 
         x_new = [x_new stdRestore(:, :, index_element)];
-        index_element = index_element + 1;
+        index_element = index_element + 1; %Which matrix needs to be connected
     end
 
-    f_std = cat(1, f_std, x_new); %向后叠加
+    f_std = cat(1, f_std, x_new); %stack down
     x_new = [];
 end
 
@@ -170,20 +170,20 @@ subplot(1,3,1);
 imshow((uint8(f_std)));
 title('standard');
 
-% low
+% same for the low one
 f_low = [];
 x_new = [];
-index_element = 1; %用来遍历8*8矩阵
+index_element = 1;
 
-for y = 1:(208/8) %一共这么多行
+for y = 1:(208/8) 
 
-    for x = 1:(288/8) %每一行先往右叠加
+    for x = 1:(288/8) 
 
         x_new = [x_new lowRestore(:, :, index_element)];
         index_element = index_element + 1;
     end
 
-    f_low = cat(1, f_low, x_new); %向后叠加
+    f_low = cat(1, f_low, x_new); 
     x_new = [];
 end
 
@@ -191,20 +191,20 @@ subplot(1,3,2);
 imshow((uint8(f_low)));
 title('low');
 
-%high
+%also the high one
 f_high = [];
 x_new = [];
-index_element = 1; %用来遍历8*8矩阵
+index_element = 1; 
 
-for y = 1:(208/8) %一共这么多行
+for y = 1:(208/8) 
 
-    for x = 1:(288/8) %每一行先往右叠加
+    for x = 1:(288/8) 
 
         x_new = [x_new stdRestore(:, :, index_element)];
         index_element = index_element + 1;
     end
 
-    f_high = cat(1, f_high, x_new); %向后叠加
+    f_high = cat(1, f_high, x_new); 
     x_new = [];
 end
 
